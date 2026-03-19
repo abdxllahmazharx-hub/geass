@@ -3,318 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEASS CLIENT | The Final Evolution</title>
     
-    <title>GEASS CLIENT | The Ultimate Minecraft Experience</title>
-    <meta name="description" content="Download GEASS CLIENT for the best FPS, custom mods, and a neon-charged Minecraft experience.">
     <meta property="og:title" content="GEASS CLIENT">
-    <meta property="og:description" content="The power of the King is now in your hands. Join 10k+ players.">
-    <meta property="og:image" content="https://lh3.googleusercontent.com/sitesv/APaQ0SRhN7a86604boQzeyzluS1H7iGfE-SKqzggANsIgpajhRTSiyYVvnYDczKYMWDFpd_a5iAX-cCOjKgZXm_mrv1yjyA6K7AGVHBfTaa2nWhOf0rPsJX9RsI2VA2kehC9QCLXmt83zCt-FJkdyeEiLDPrOi24sF0VV182TzZS_xMZ0qw1zymbCrdM1aM=w1280">
-    <meta property="og:url" content="https://geassclient.com">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <meta property="og:description" content="Experience Minecraft like never before. Insane FPS, custom UI, and built-in mods.">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280">
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Silkscreen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Silkscreen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --geass-red: #ff1e56;
             --geass-magenta: #ff00ff;
-            --bg-deep: #080808;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --border-glow: rgba(255, 30, 86, 0.3);
+            --bg-dark: #050505;
+            --mc-dirt: #2c1a11;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-deep);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: default; }
+        body { background: var(--bg-dark); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .font-gaming { font-family: 'Silkscreen', cursive; }
 
+        /* Professional Glassmorphism */
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
         /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--geass-red); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--geass-red); border-radius: 4px; }
 
-        /* BACKGROUND PARTICLES */
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #150505 0%, #000 100%);
+        /* ANIMATED BACKGROUND */
+        #hero-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(to bottom, #0a0a0a, #000);
         }
 
-        /* SECTION SPACING */
-        section { padding: 120px 10% 80px 10%; }
-
-        /* GLASSMORPHISM */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-        }
-
-        /* THE OLD UI LAUNCHER (Grid System) */
-        .launcher-mockup {
-            width: 100%;
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-            position: relative;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        /* --- THE SIMULATION ENGINE --- */
+        .mc-container {
+            width: 100%; max-width: 1000px; aspect-ratio: 16/9;
+            position: relative; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,1), 0 0 20px rgba(255, 30, 86, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.1);
+            background: #000;
         }
 
-        .old-ui-bg {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0; left: 0;
+        /* State 1: Main Menu (2x2 Grid) */
+        .mc-screen { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .mc-screen.active { display: flex; }
+
+        .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; position: absolute; inset: 0; }
+        .sq-blk { background: #000; }
+        .sq-pnk { background: var(--geass-magenta); opacity: 0.8; }
+
+        .mc-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            width: 250px; padding: 10px; margin: 4px; font-weight: 900; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;
         }
+        .mc-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); cursor: pointer; }
 
-        .sq-black { background: #000; }
-        .sq-pink { background: var(--geass-magenta); opacity: 0.85; }
-
-        .launcher-content {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(2px);
+        /* State 2: World Select */
+        .world-item {
+            background: rgba(255,255,255,0.05); border: 1px solid transparent;
+            width: 80%; padding: 15px; margin-bottom: 10px; display: flex; gap: 15px;
         }
+        .world-item:hover { border-color: white; background: rgba(255,255,255,0.1); cursor: pointer; }
 
-        .launcher-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 40px;
-            margin: 4px 0;
-            width: 220px;
-            text-align: center;
-            font-weight: 800;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: 0.2s;
-        }
+        /* State 3: Loading Screen */
+        .loading-bg { background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'), linear-gradient(#311, #111); background-color: var(--mc-dirt); }
+        .progress-bar { width: 300px; height: 20px; background: #000; border: 2px solid #888; margin-top: 20px; }
+        .progress-fill { width: 0%; height: 100%; background: #5f5; transition: width 0.1s linear; }
 
-        .launcher-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: scale(1.02);
-        }
+        /* State 4: In-Game HUD */
+        .game-view { background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=1000') center/cover; }
+        .hud-top-left { position: absolute; top: 20px; left: 20px; font-family: monospace; color: #5f5; text-shadow: 2px 2px #000; }
 
-        .launcher-btn.quit { color: #ff4444; border-color: rgba(255,68,68,0.3); }
-
-        /* NEON BUTTONS */
-        .btn-main {
-            background: linear-gradient(45deg, var(--geass-red), #991b1b);
-            padding: 16px 40px;
-            border-radius: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-main:hover {
-            box-shadow: 0 0 30px var(--geass-red);
-            transform: translateY(-3px);
-        }
-
-        /* REVEAL ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        /* UTILITY */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="bg-canvas"></div>
+    <div id="hero-bg"></div>
 
-    <nav class="fixed top-0 w-full z-[100] py-6 px-[10%] flex justify-between items-center transition-all duration-500" id="navbar">
+    <nav class="fixed top-0 w-full z-50 glass py-5 px-10 md:px-24 flex justify-between items-center">
         <div class="flex items-center gap-4">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-10 h-10 rounded-lg shadow-lg" alt="Logo">
-            <span class="font-gaming text-xl text-red-500 tracking-tighter">GEASS <span class="text-white">CLIENT</span></span>
+            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-10 h-10 rounded-md" alt="Logo">
+            <span class="font-gaming text-xl tracking-widest text-red-500">GEASS</span>
         </div>
-        
-        <div class="hidden md:flex gap-10 font-bold text-xs uppercase tracking-widest text-gray-400">
+        <div class="hidden md:flex gap-12 font-bold text-xs uppercase tracking-widest text-gray-400">
             <a href="#home" class="hover:text-white transition">Home</a>
+            <a href="#launcher" class="hover:text-white transition">The Launcher</a>
             <a href="#features" class="hover:text-white transition">Features</a>
-            <a href="#download" class="hover:text-white transition">Downloads</a>
-            <a href="https://discord.gg/vN4xXAS3Hw" target="_blank" class="text-red-500 flex items-center gap-2"><i class="fab fa-discord"></i> Discord</a>
+            <a href="https://discord.gg/vN4xXAS3Hw" target="_blank" class="text-red-500"><i class="fab fa-discord"></i> Discord</a>
         </div>
-
-        <a href="#download" class="hidden lg:block border border-white/20 px-6 py-2 rounded-lg font-bold text-xs uppercase hover:bg-white hover:text-black transition">Get Started</a>
+        <button class="bg-red-600 px-6 py-2 rounded font-black text-xs uppercase hover:bg-red-700 transition">Download</button>
     </nav>
 
-    <section id="home" class="min-h-screen flex flex-col items-center">
-        <div class="text-center mb-16 reveal active">
-            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-none uppercase tracking-tighter">
-                Evolve Your <br> <span class="text-red-500">Gameplay</span>
-            </h1>
-            <p class="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl">
-                The most advanced Minecraft launcher built for performance and power. 
-                Experience the game exactly how it was meant to be played.
-            </p>
+    <section id="home" class="pt-40 pb-20 px-10 text-center">
+        <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-tighter uppercase reveal active">
+            The Power of <span class="text-red-500">Geass</span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl mb-12 reveal active">
+            The only Minecraft client built for competitive perfection. 
+            Native performance, zero latency, and the legacy UI you love.
+        </p>
+    </section>
+
+    <section id="launcher" class="flex flex-col items-center py-20 px-6">
+        <div class="mb-10 text-center reveal">
+            <h2 class="text-3xl font-black uppercase mb-2">Live Client Simulation</h2>
+            <p class="text-gray-500">Try the interface below. Click 'Singleplayer' to begin the launch sequence.</p>
         </div>
 
-        <div class="launcher-mockup reveal delay-200">
-            <div class="old-ui-bg">
-                <div class="sq-black"></div><div class="sq-pink"></div>
-                <div class="sq-pink"></div><div class="sq-black"></div>
-            </div>
-            
-            <div class="launcher-content">
-                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-20 h-20 mb-4 drop-shadow-2xl" alt="UI Logo">
-                <h2 class="font-gaming text-2xl mb-8">GEASS CLIENT</h2>
-                
-                <div class="flex flex-col">
-                    <button class="launcher-btn">Singleplayer</button>
-                    <button class="launcher-btn">Multiplayer</button>
-                    <button class="launcher-btn">Cosmetics</button>
-                    <button class="launcher-btn">Mod Menu</button>
-                    <button class="launcher-btn text-gray-500">Settings</button>
-                    <button class="launcher-btn quit">Exit Game</button>
+        <div class="mc-container reveal">
+            <div id="screen-main" class="mc-screen active">
+                <div class="grid-2x2">
+                    <div class="sq-blk"></div><div class="sq-pnk"></div>
+                    <div class="sq-pnk"></div><div class="sq-blk"></div>
                 </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-24 h-24 mb-4 drop-shadow-2xl" alt="Logo">
+                    <h2 class="font-gaming text-3xl mb-10 tracking-widest">GEASS CLIENT</h2>
+                    <button class="mc-btn" onclick="showScreen('screen-world')">Singleplayer</button>
+                    <button class="mc-btn">Multiplayer</button>
+                    <button class="mc-btn">Mod Manager</button>
+                    <button class="mc-btn">Cosmetics</button>
+                    <button class="mc-btn text-gray-500">Settings</button>
+                    <button class="mc-btn text-red-500 mt-4 border-red-900/30">Quit Game</button>
+                </div>
+            </div>
+
+            <div id="screen-world" class="mc-screen bg-black/90">
+                <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-gray-400">Select World</h3>
+                <div class="world-item" onclick="startLoading()">
+                    <div class="w-16 h-16 bg-gray-800 rounded"></div>
+                    <div>
+                        <div class="font-bold text-lg">Woof SMP Survival</div>
+                        <div class="text-sm text-gray-500">New World (03/19/26 15:58)</div>
+                        <div class="text-xs text-red-500 mt-1">Survival Mode, Version 1.20.1</div>
+                    </div>
+                </div>
+                <div class="world-item opacity-50">
+                    <div class="w-16 h-16 bg-gray-800 rounded"></div>
+                    <div>
+                        <div class="font-bold text-lg">Redstone Testing</div>
+                        <div class="text-sm text-gray-500">Creative (02/10/26 12:00)</div>
+                    </div>
+                </div>
+                <button class="mt-8 text-xs underline uppercase tracking-widest" onclick="showScreen('screen-main')">Cancel</button>
+            </div>
+
+            <div id="screen-loading" class="mc-screen loading-bg">
+                <h2 class="font-gaming text-2xl text-white">Loading Terrain...</h2>
+                <div class="progress-bar">
+                    <div id="bar-fill" class="progress-fill"></div>
+                </div>
+                <p id="loading-status" class="mt-4 text-xs text-gray-400 font-mono">0% Complete</p>
+            </div>
+
+            <div id="screen-game" class="mc-screen game-view">
+                <div class="hud-top-left">
+                    GEASS CLIENT v2.4.0<br>
+                    FPS: 640/220<br>
+                    Ping: 12ms (Woof SMP)<br>
+                    XYZ: -142 / 64 / 892
+                </div>
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-1">
+                    <div class="w-12 h-12 glass border-2 border-white/20"></div>
+                    <div class="w-12 h-12 glass border-2 border-white/20"></div>
+                    <div class="w-12 h-12 border-2 border-white bg-white/10"></div>
+                    <div class="w-12 h-12 glass border-2 border-white/20"></div>
+                    <div class="w-12 h-12 glass border-2 border-white/20"></div>
+                </div>
+                <button class="absolute top-5 right-5 glass px-4 py-1 text-xs rounded" onclick="showScreen('screen-main')">ESC (Exit)</button>
             </div>
         </div>
     </section>
 
-    <div style="text-align:center; padding:60px 20px;" class="reveal">
-        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRhN7a86604boQzeyzluS1H7iGfE-SKqzggANsIgpajhRTSiyYVvnYDczKYMWDFpd_a5iAX-cCOjKgZXm_mrv1yjyA6K7AGVHBfTaa2nWhOf0rPsJX9RsI2VA2kehC9QCLXmt83zCt-FJkdyeEiLDPrOi24sF0VV182TzZS_xMZ0qw1zymbCrdM1aM=w1280" 
-             alt="Geass Client Banner" 
-             style="width:100%; max-width:900px; border-radius:15px; box-shadow:0 0 40px rgba(255,0,0,0.4);">
-    </div>
-
-    <section id="features" class="grid lg:grid-cols-3 gap-12 bg-white/5 py-32">
-        <div class="glass p-12 reveal">
-            <i class="fas fa-tachometer-alt text-4xl text-red-500 mb-8"></i>
-            <h3 class="text-2xl font-bold mb-4 uppercase">FPS Overclock</h3>
-            <p class="text-gray-400 leading-relaxed">Our custom rendering engine bypasses standard Minecraft limitations, delivering up to 3x higher frame rates on low-end hardware.</p>
-        </div>
-        <div class="glass p-12 reveal">
-            <i class="fas fa-layer-group text-4xl text-red-500 mb-8"></i>
-            <h3 class="text-2xl font-bold mb-4 uppercase">Modular UI</h3>
-            <p class="text-gray-400 leading-relaxed">Drag and drop HUD elements anywhere on your screen. Customize colors, sizes, and transparency with a live preview.</p>
-        </div>
-        <div class="glass p-12 reveal">
-            <i class="fas fa-user-shield text-4xl text-red-500 mb-8"></i>
-            <h3 class="text-2xl font-bold mb-4 uppercase">Secure Login</h3>
-            <p class="text-gray-400 leading-relaxed">Microsoft OAuth 2.0 integration ensures your account data never touches our servers. Safe, fast, and encrypted.</p>
+    <section id="features" class="py-32 px-10 md:px-24 bg-white/5">
+        <div class="grid lg:grid-cols-3 gap-16">
+            <div class="reveal">
+                <div class="text-red-500 text-5xl font-black mb-6">01</div>
+                <h4 class="text-2xl font-bold mb-4 uppercase">Hyper Performance</h4>
+                <p class="text-gray-400">Integrated Lithium, Sodium, and Starlight tech. Geass Client reaches FPS levels that other launchers can't touch.</p>
+            </div>
+            <div class="reveal">
+                <div class="text-red-500 text-5xl font-black mb-6">02</div>
+                <h4 class="text-2xl font-bold mb-4 uppercase">Modern HUD</h4>
+                <p class="text-gray-400">A fully modular glassmorphism interface. Control your visuals without leaving the game window.</p>
+            </div>
+            <div class="reveal">
+                <div class="text-red-500 text-5xl font-black mb-6">03</div>
+                <h4 class="text-2xl font-bold mb-4 uppercase">Secure Access</h4>
+                <p class="text-gray-400">Built with security as a priority. Fast session switching and direct Microsoft integration.</p>
+            </div>
         </div>
     </section>
 
-    <section id="download" class="text-center py-40">
-        <div class="reveal">
-            <h2 class="text-6xl font-black mb-8 uppercase tracking-tighter">Ready to join?</h2>
-            <div class="flex flex-wrap justify-center gap-8 mb-12">
-                <a href="#" class="btn-main px-12 py-5 text-xl">
-                    <i class="fab fa-windows"></i> Download for Windows
-                </a>
-                <a href="https://discord.gg/vN4xXAS3Hw" class="glass px-12 py-5 text-xl font-bold border border-white/10 hover:bg-white/5 transition flex items-center gap-3">
-                    <i class="fab fa-discord"></i> Community Discord
-                </a>
-            </div>
-            <p class="text-gray-500 text-sm">Version 2.4.0 (Latest) • Requires Java 17+</p>
+    <footer class="py-20 px-10 md:px-24 border-t border-white/5 flex flex-col items-center">
+        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-12 h-12 mb-6 grayscale hover:grayscale-0 transition" alt="Icon">
+        <div class="flex gap-10 text-gray-500 mb-8 uppercase text-[10px] font-bold tracking-widest">
+            <a href="https://discord.gg/vN4xXAS3Hw" class="hover:text-white">Discord</a>
+            <a href="#" class="hover:text-white">Store</a>
+            <a href="#" class="hover:text-white">Github</a>
+            <a href="#" class="hover:text-white">Privacy</a>
         </div>
-    </section>
-
-    <footer class="py-20 px-[10%] border-t border-white/5 bg-black/50 text-gray-500">
-        <div class="grid md:grid-cols-2 gap-20 mb-16">
-            <div>
-                <div class="flex items-center gap-4 mb-6">
-                    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STsq5gePx79oLbE7gZm4zjxSp2WvWagolWMLgJZ2jqvLZNv6j9QcbDyIKKo-fjOe0PpOfRxA1yCw6c8X_poWwo6IGGwTZ9Jn1zidQ8pmvAaTEHG3zSiNvt8MXxJ0hFFx4n-_7m06MhV_47lOIqA5xtXHIpupmdD1CDFEerU2LRZSo4YNw9shDgD=w1280" class="w-8 h-8 opacity-70" alt="Icon">
-                    <span class="font-gaming text-lg tracking-tighter">GEASS</span>
-                </div>
-                <p class="max-w-md leading-relaxed">
-                    GEASS CLIENT is an independent modification for Minecraft. We focus on performance, accessibility, and community-driven features.
-                </p>
-            </div>
-            <div class="flex justify-end gap-20">
-                <div>
-                    <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Resources</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-red-500 transition">Store</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition">GitHub</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition">Wiki</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Support</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="https://discord.gg/vN4xXAS3Hw" class="hover:text-red-500 transition">Discord Server</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition">Bug Reports</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition">Staff Application</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="text-center pt-10 border-t border-white/5 text-[10px] uppercase tracking-[0.5em]">
+        <div class="text-gray-700 text-[10px] uppercase tracking-[0.5em]">
             © 2026 GEASS CLIENT. NOT AN OFFICIAL MINECRAFT PRODUCT.
         </div>
     </footer>
 
     <script>
-        // Scroll Reveal Animation
+        // --- SCREEN CONTROLLER ---
+        function showScreen(screenId) {
+            document.querySelectorAll('.mc-screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function startLoading() {
+            showScreen('screen-loading');
+            let progress = 0;
+            const bar = document.getElementById('bar-fill');
+            const status = document.getElementById('loading-status');
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 8;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => showScreen('screen-game'), 500);
+                }
+                bar.style.width = progress + '%';
+                status.innerText = Math.floor(progress) + '% Complete';
+            }, 100);
+        }
+
+        // --- SCROLL REVEAL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Navbar Styling on Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(5,5,5,0.9)';
-                nav.style.padding = '15px 10%';
-                nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-            } else {
-                nav.style.background = 'transparent';
-                nav.style.padding = '30px 10%';
-                nav.style.borderBottom = 'none';
-            }
-        });
-
-        // Interactive Launcher Logic
-        document.querySelectorAll('.launcher-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const text = btn.innerText;
-                if(text !== 'Exit Game') {
-                    alert(`Launching ${text}... (Simulated)`);
-                } else {
-                    if(confirm("Are you sure you want to quit?")) {
-                        window.close();
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
